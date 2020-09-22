@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <Todo />
+      <Todo />
   </div>
 </template>
 
@@ -13,13 +13,12 @@ export default {
     Todo,
   },
 };
-
 </script>
 
 <style lang="scss" scoped>
-  .home {
-    display: flex;
-    padding: 100px;
-    align-self: center;
-  }
+.home {
+  display: flex;
+  padding: 100px;
+  align-self: center;
+}
 </style>

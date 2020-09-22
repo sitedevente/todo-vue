@@ -1,9 +1,9 @@
 <template>
   <li class="task">
-    <div class="label">{{title}}</div>
+    <div class="label">{{task.title}}</div>
     <div class="actions">
       <div class="action" @click="deleteTask(index)">X</div>
-      <div class="action" @click="doAction('Marked this task as done')">Done</div>
+      <div class="action" @click="taskIsDone(task, index)">Done</div>
       <div class="action" @click="doAction('Raised priority level of this task')">Up</div>
       <div class="action" @click="doAction('Lowered priority level of this task')">Down</div>
     </div>
@@ -16,8 +16,8 @@ import { EventBus } from "../../EventBus";
 export default {
   name: "Task",
   props: {
-    title: {
-      type: String,
+    task: {
+      type: Object,
       required: true,
     },
     index: {
@@ -27,6 +27,10 @@ export default {
   },
   methods: {
     deleteTask(index) {
+      EventBus.$emit("deleteTask", index);
+    },
+    taskIsDone(task, index) {
+      EventBus.$emit("TASK_IS_DONE", task);
       EventBus.$emit("deleteTask", index);
     },
     doAction(msg) {

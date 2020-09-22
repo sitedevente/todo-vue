@@ -1,6 +1,6 @@
 <template>
   <div class="input">
-    <input @keyup.enter="submitNewTask" :placeholder="placeholder" v-model="newTask" />
+    <input @keyup.enter="submitNewTask" :placeholder="placeholder" v-model.trim="newTask" />
   </div>
 </template>
 

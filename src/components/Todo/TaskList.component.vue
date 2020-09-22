@@ -1,7 +1,7 @@
 <template>
   <div class="task-list">
     <ol v-if="tasks.length > 0" class="task-list">
-      <Task v-for="(task, index) in tasks" :key="index" :index="index" :title="task.title" />
+      <Task v-for="(task, index) in tasks" :key="index" :index="index" :task="task" />
     </ol>
     <div v-else class="task-list">
       Aucune tâche crée pour le moment:
@@ -20,6 +20,7 @@ export default {
   data() {
     return {
       tasks: [],
+      done: [],
     };
   },
   mounted() {
@@ -39,17 +40,24 @@ export default {
       ...this.tasks,
     ];
 
-    EventBus
-      .$on("saveTask", (task) => {
-        this.tasks = [
-          {
-            title: task,
-          },
-          ...this.tasks,
-        ];
-      })
+    EventBus.$on("saveTask", (task) => {
+      this.tasks = [
+        {
+          title: task,
+        },
+        ...this.tasks,
+      ];
+    })
+
       .$on("deleteTask", (index) => {
         this.tasks.splice(index, 1);
+      })
+
+      .$on("TASK_IS_DONE", (task) => {
+        this.done = [
+          task,
+          ...this.done,
+        ];
       });
   },
 };
