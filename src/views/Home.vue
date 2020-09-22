@@ -15,3 +15,11 @@ export default {
 };
 
 </script>
+
+<style lang="scss" scoped>
+  .home {
+    display: flex;
+    padding: 100px;
+    align-self: center;
+  }
+</style>
