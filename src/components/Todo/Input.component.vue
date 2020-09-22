@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { EventBus } from "../../EventBus";
+
 export default {
   name: "Input",
   data() {
@@ -14,7 +16,7 @@ export default {
   },
   methods: {
     submitNewTask() {
-      this.$emit("addNewTask", this.newTask);
+      EventBus.$emit("saveTask", this.newTask);
       this.newTask = "";
     },
   },

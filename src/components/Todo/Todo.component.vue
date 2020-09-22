@@ -1,7 +1,7 @@
 <template>
   <div class="todo">
-    <Input @addNewTask="pushNewTask" />
-    <TaskList :tasks="this.tasks" />
+    <Input />
+    <TaskList />
   </div>
 </template>
 
@@ -12,44 +12,6 @@ import TaskList from "@/components/Todo/TaskList.component.vue";
 export default {
   name: "Todo",
   components: { Input, TaskList },
-  methods: {
-    pushNewTask(task) {
-      this.tasks = [
-        {
-          title: task,
-        },
-        ...this.tasks,
-      ];
-    },
-    deleteAsk() {
-      console.log("task deleted: ");
-    },
-  },
-  data() {
-    return {
-      tasks: [],
-    };
-  },
-  created() {
-    console.log("todo components has been created !");
-  },
-  mounted() {
-    this.tasks = [
-      {
-        title: "Wash the dishes",
-      },
-      {
-        title: "Swipe the floor",
-      },
-      {
-        title: "Call a dentist",
-      },
-      {
-        title: "Finish watching react ( and end up Redux ) courses",
-      },
-      ...this.tasks,
-    ];
-  },
 };
 </script>
 
