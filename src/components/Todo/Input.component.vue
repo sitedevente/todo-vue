@@ -1,12 +1,14 @@
 <template>
   <div class="input">
-    <input @keyup.enter="submitNewTask" :placeholder="placeholder" v-model.trim="newTask" />
+    <input
+      @keyup.enter="addTask"
+      :placeholder="placeholder"
+      v-model.trim="newTask"
+    />
   </div>
 </template>
 
 <script>
-import { EventBus } from "../../EventBus";
-
 export default {
   name: "Input",
   data() {
@@ -14,17 +16,20 @@ export default {
       newTask: "",
     };
   },
-  methods: {
-    submitNewTask() {
-      EventBus.$emit("saveTask", this.newTask);
-      this.newTask = "";
-    },
-  },
   computed: {
     placeholder: {
       get: function () {
         return "Type in a new task and hit enter to add a new task";
       },
+    },
+  },
+  methods: {
+    addTask() {
+      this.$store.dispatch("addTask", {
+        title: this.newTask,
+      });
+
+      this.newTask = "";
     },
   },
 };

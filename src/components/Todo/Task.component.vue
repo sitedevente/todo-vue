@@ -1,17 +1,27 @@
 <template>
   <li class="task">
-    <div class="label">{{task.title}}</div>
+    <div class="label">{{ task.title }}</div>
     <div class="actions">
       <div class="action" @click="deleteTask(index)">X</div>
-      <div class="action" @click="taskIsDone(task, index)">Done</div>
-      <div class="action" @click="doAction('Raised priority level of this task')">Up</div>
-      <div class="action" @click="doAction('Lowered priority level of this task')">Down</div>
+      <div class="action" @click="markAsDone({ task, index })">Done</div>
+      <div
+        class="action"
+        @click="doAction('Raised priority level of this task')"
+      >
+        Up
+      </div>
+      <div
+        class="action"
+        @click="doAction('Lowered priority level of this task')"
+      >
+        Down
+      </div>
     </div>
   </li>
 </template>
 
 <script>
-import { EventBus } from "../../EventBus";
+import { mapActions } from "vuex";
 
 export default {
   name: "Task",
@@ -26,13 +36,7 @@ export default {
     },
   },
   methods: {
-    deleteTask(index) {
-      EventBus.$emit("deleteTask", index);
-    },
-    taskIsDone(task, index) {
-      EventBus.$emit("TASK_IS_DONE", task);
-      EventBus.$emit("deleteTask", index);
-    },
+    ...mapActions(["deleteTask", "markAsDone"]),
     doAction(msg) {
       console.log(msg);
     },
